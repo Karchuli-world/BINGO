@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Turn-based Bingo — Sequential letters B I N G O</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Turn-based Bingo — Sequential letters B I N G O</h1>
+    <div class="controls">
+      <button id="autoFillBtn">Auto-fill</button>
+      <button id="submitBtn" disabled>Submit Card</button>
+      <button id="newGameBtn" class="alt">New Game (generate bot)</button>
+      <button id="startBtn" class="alt">Start</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="boards">
+      <article class="card" id="playerCardContainer">
+        <div class="title"><div><strong>Your Card</strong></div><div id="playerStatus" class="small"></div></div>
+        <div class="letters-top" id="playerLettersTop">
+          <div class="letter-top" id="pL0">B</div>
+          <div class="letter-top" id="pL1">I</div>
+          <div class="letter-top" id="pL2">N</div>
+          <div class="letter-top" id="pL3">G</div>
+          <div class="letter-top" id="pL4">O</div>
+        </div>
+        <div id="playerGrid" class="grid"></div>
+        <div class="hint" id="playerHint">Pick numbers into your card using the picker. After Submit, Start and play turn-based picks. Every new completed line (row/column/diagonal) awards the next letter (B→I→N→G→O). When all five letters are earned the BINGO ! button appears below the card.</div>
+        <div style="margin-top:12px"><strong class="small">Available numbers</strong>
+          <div id="availableNumbers" class="available"></div>
+        </div>
+        <div id="playerBingoContainer"></div>
+      </article>
+
+      <article class="card" id="botCardContainer">
+        <div class="title"><div><strong>Bot Card</strong></div><div id="botStatus" class="small"></div></div>
+        <div class="letters-top" id="botLettersTop">
+          <div class="letter-top" id="bL0">B</div>
+          <div class="letter-top" id="bL1">I</div>
+          <div class="letter-top" id="bL2">N</div>
+          <div class="letter-top" id="bL3">G</div>
+          <div class="letter-top" id="bL4">O</div>
+        </div>
+        <div id="botGrid" class="grid"></div>
+      </article>
+    </section>
+
+    <aside class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div><strong>Last Action:</strong> <span id="lastAction">—</span></div>
+        <div id="turnIndicator" class="small"></div>
+      </div>
+      <div class="status" id="statusText">Fill and Submit your card before starting. Turn-based picks will begin when you press Start.</div>
+      <div style="margin-top:10px;"><strong>Picks history</strong></div>
+      <div id="called" class="called"></div>
+      <div style="margin-top:10px;color:var(--muted);font-size:13px;">
+        Flow: Player picks → Bot picks → Player ack. Lines that complete for the first time are counted and award letters in order B,I,N,G,O. The player auto-wins when all five letters are earned.
+      </div>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

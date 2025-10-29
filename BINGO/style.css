@@ -1,0 +1,291 @@
+:root {
+  --bg:#071028;
+  --card:#0f1724;
+  --panel:#071827;
+  --accent:#2563eb;
+  --marked:#10b981;
+  --text:#e6eef8;
+  --muted:#9fb3d6;
+  --hidden:#0b1724;
+  --empty:#0b1220;
+  --picker-bg:#0b2030;
+  --xcolor:#ff5252;
+  --letter-cross:#ffdd57;
+}
+
+* {
+  box-sizing:border-box
+}
+
+body {
+  margin:0;
+  font-family:system-ui,Arial,sans-serif;
+  background:linear-gradient(180deg,#071028 0%,#071829 100%);
+  color:var(--text);
+  padding:18px
+}
+
+header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px
+}
+
+h1 {
+  font-size:18px;
+  margin:0
+}
+
+.controls {
+  display:flex;
+  gap:8px;
+  align-items:center
+}
+
+button {
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700
+}
+
+button.alt {
+  background:#374151
+}
+ 
+button[disabled] {
+  opacity:.45;
+  cursor:not-allowed
+}
+
+.layout {
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:14px;
+  align-items:start
+}
+
+.boards {
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap
+}
+
+.card {
+  background:var(--card);
+  border-radius:12px;
+  padding:12px;
+  width:360px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.6)
+}
+
+.title {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px
+}
+
+.letters-top {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-bottom:8px
+}
+
+.letter-top {
+  text-align:center;
+  color:var(--muted);
+  font-weight:900;
+  padding:8px 0;
+  border-radius:6px;
+  background:transparent;
+  position:relative 
+}
+
+.letter-top.crossed {
+  color:var(--letter-cross);
+  text-decoration:line-through;
+  opacity:0.95;
+}
+
+.panel {
+  background:var(--panel);
+  border-radius:12px;
+  padding:12px;
+  min-height:220px
+}
+
+.called {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px
+}
+
+.badge{background:#071827;
+  padding:6px 8px;
+  border-radius:999px;
+  font-weight:700;
+  color:var(--muted)
+}
+
+.status {
+  margin-top:10px;
+  font-weight:800
+}
+
+.hint {
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px
+}
+
+.grid {
+  display:grid;
+  gap:8px
+}
+
+.cell {
+  aspect-ratio:1/1;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  padding:0;
+  font-weight:800;
+  user-select:none;
+  border:2px solid rgba(255,255,255,0.03);
+  position:relative
+}
+
+.cell.empty {
+  background:var(--empty);
+  color:var(--muted);
+  cursor:pointer
+}
+
+.cell.hidden {
+  background:var(--hidden);
+  color:transparent;
+  cursor:default
+}
+
+.cell.x {
+  background:transparent;
+  color:var(--xcolor)
+}
+
+.cell.x::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  top: 12%;
+  width: 76%;
+  height: 76%;
+  background:
+    linear-gradient(135deg, transparent 46%, var(--xcolor) 46%, var(--xcolor) 54%, transparent 54%),
+    linear-gradient(45deg, transparent 46%, var(--xcolor) 46%, var(--xcolor) 54%, transparent 54%);
+  border-radius:8px;
+  opacity:0.95;
+  pointer-events:none;
+}
+.cell.win-highlight {
+  box-shadow: 0 0 0 3px rgba(255,221,87,0.12) inset; 
+}
+
+.small {
+  font-size:13px;
+  color:var(--muted)
+}
+
+.available {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px
+}
+
+.avail-badge {
+  background:#0c1b2a;
+  padding:6px 8px;
+  border-radius:6px;
+  font-weight:700;
+  color:var(--muted);
+  cursor:pointer
+}
+
+.avail-badge.taken {
+  opacity:.35;
+  text-decoration:line-through;
+  cursor:not-allowed
+}
+
+.picker {
+  position:absolute;
+  z-index:40;
+  background:var(--picker-bg);
+  padding:8px;
+  border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.6);
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(40px,1fr));
+  gap:6px;
+  width:220px
+}
+
+.picker input[type="number"] {
+  width:100%;
+  box-sizing:border-box;
+  padding:6px;
+  border-radius:6px;
+  border:none;
+  background:#071827;
+  color:var(--text);
+  margin-top:6px
+}
+
+.picker .pbtn {
+  background:#0b1220;
+  padding:6px;
+  border-radius:6px;
+  text-align:center;
+  cursor:pointer;
+  color:var(--muted);
+  font-weight:800
+}
+
+.picker .pbtn.disabled {
+  opacity:.35;
+  cursor:not-allowed
+}
+
+.bingo-btn {
+  display:block;
+  margin:12px auto 0;
+  background:#ffdd57;
+  color:#062d26;
+  padding:10px 14px;
+  font-weight:900;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+}
+
+.bingo-btn[disabled] {
+  opacity:0.6;
+  cursor:not-allowed 
+}
+
+@media (max-width:980px){
+  .layout {
+    grid-template-columns:1fr
+  }.card {
+    width:100%
+  }
+}
