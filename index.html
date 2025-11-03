@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Turn-based Bingo — Larger Text</title>
+
+  <!-- Bootstrap (dropdown) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <div class="dropdown">
+        <button class="fa-menu-btn" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Menu">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="menuDropdown">
+          <li><button class="dropdown-item" id="menuResetCard">Reset Card</button></li>
+          <li><button class="dropdown-item" id="menuToggleBotReveal">Toggle Bot Reveal</button></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><button class="dropdown-item" id="menuAbout">About</button></li>
+        </ul>
+      </div>
+
+      <h1><strong>BINGO</strong></h1>
+    </div>
+
+    <div class="controls" role="toolbar" aria-label="controls">
+      <button id="autoFillBtn">Auto-fill</button>
+      <button id="submitBtn" disabled>Submit Card</button>
+      <button id="newGameBtn" class="alt">New Game</button>
+      <button id="startBtn" class="alt">Start</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="boards" aria-live="polite">
+      <article class="card" id="playerCardContainer">
+        <div class="title">
+          <div><strong>Your Card</strong></div>
+          <div id="playerStatus" class="small"></div>
+        </div>
+
+        <div class="letters-top" id="playerLettersTop" aria-hidden="true">
+          <div class="letter-top" id="pL0">B</div>
+          <div class="letter-top" id="pL1">I</div>
+          <div class="letter-top" id="pL2">N</div>
+          <div class="letter-top" id="pL3">G</div>
+          <div class="letter-top" id="pL4">O</div>
+        </div>
+
+        <div id="playerGrid" class="grid" aria-label="player-card"></div>
+
+        <div class="hint" id="playerHint">Pick numbers into your card using the picker. After Submit, Start and play
+          turn-based picks. Every new completed line awards the next letter (B→I→N→G→O). When all five letters are
+          earned the BINGO ! button appears below the card.</div>
+
+        <!-- Available numbers block remains in DOM but hidden via CSS (.available and .available-label) -->
+        <div style="margin-top:12px" class="available-container">
+          <strong class="small available-label">Available numbers</strong>
+          <div id="availableNumbers" class="available" aria-live="polite"></div>
+        </div>
+
+        <div id="playerBingoContainer"></div>
+      </article>
+
+      <article class="card hidden-card" id="botCardContainer">
+        <div class="title">
+          <div><strong>Bot Card</strong></div>
+          <div id="botStatus" class="small"></div>
+        </div>
+
+        <div class="letters-top" id="botLettersTop" aria-hidden="true">
+          <div class="letter-top" id="bL0">B</div>
+          <div class="letter-top" id="bL1">I</div>
+          <div class="letter-top" id="bL2">N</div>
+          <div class="letter-top" id="bL3">G</div>
+          <div class="letter-top" id="bL4">O</div>
+        </div>
+
+        <div id="botGrid" class="grid" aria-label="bot-card"></div>
+      </article>
+    </section>
+    <aside class="panel" role="region" aria-label="game panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div><strong>Last Action:</strong> <span id="lastAction">—</span></div>
+        <div id="turnIndicator" class="small"></div>
+      </div>
+
+      <div class="status" id="statusText">Fill and Submit your card before starting. Turn-based picks will begin when
+        you press Start.</div>
+    </aside>
+
+  </main>
+  <script src="script.js"></script>
+  <!-- Winner Modal -->
+  <div class="modal fade" id="winnerModal" tabindex="-1" aria-labelledby="winnerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background-color: #0f1724; color: #fff; border: 2px solid #ffdd57;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="winnerModalLabel">🎉 We Have a Winner! 🎉</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="winnerModalBody">
+          <!-- Winner message will be inserted here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+```
